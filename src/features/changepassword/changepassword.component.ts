@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from "../../shared/components/input/input.component";
 import { AuthService } from '../../core/auth/service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-changepassword',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './changepassword.component.html',
   styleUrl: './changepassword.component.css'
 })
-export class ChangepasswordComponent  implements OnInit {
+export class ChangepasswordComponent  implements OnInit  , OnDestroy {
 
   private readonly fb = inject(FormBuilder)
   private readonly authService = inject(AuthService)
@@ -19,6 +20,7 @@ export class ChangepasswordComponent  implements OnInit {
   private readonly router = inject(Router)
 
   changePasswordForm !: FormGroup;
+  changePassSub !: Subscription;
 
   ngOnInit(): void {
     this.initForm(); 
@@ -49,8 +51,10 @@ export class ChangepasswordComponent  implements OnInit {
 
   updateLoggedUserPassword(): void {
     if (this.changePasswordForm.valid) {
+
+      if( this.changePassSub) this.changePassSub.unsubscribe() ; 
       console.log( this.changePasswordForm);
-      this.authService.updateLoggedUserPassword(this.changePasswordForm.value).subscribe({
+    this.changePassSub =   this.authService.updateLoggedUserPassword(this.changePasswordForm.value).subscribe({
         next: (res => {
           if (res.message === 'success')
             this.cookieService.set('token', res.token);
@@ -61,4 +65,8 @@ export class ChangepasswordComponent  implements OnInit {
       })
     }
   }
+
+ngOnDestroy(): void {
+  this.changePassSub.unsubscribe(); 
+}
 }
