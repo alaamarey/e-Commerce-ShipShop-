@@ -1,0 +1,23 @@
+<section  class="my-30 py-10">
+  <div class="container">
+
+    <h1 class="font-black md:text-4xl text-xl text-center md:text-start ">POPULAR BRANDS</h1>
+
+    <swiper-container
+      class=" cursor-pointer"
+      pagination="true"
+      pagination-clickable="true"
+      slides-per-view="3"
+      space-between="30"
+      loop="true"
+      autoplay-delay="2000"
+      autoplay-disable-on-interaction="false"
+      >
+      @for (brand of brandsDataList.slice(0,9); track brand._id) {
+      <swiper-slide class="shadow-xl ">
+        <img [src]="brand.image" [alt]="brand.name"    />
+      </swiper-slide>
+      }
+    </swiper-container>
+  </div>
+</section>

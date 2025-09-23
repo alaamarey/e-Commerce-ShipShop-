@@ -1,0 +1,75 @@
+<section class="bg-gray-100">
+  <div class="grid md:grid-cols-12 items-center gap-x-10">
+    <div class="col-span-6">
+      <img
+        src="/auth5.jpg"
+        class="h-screen w-full object-cover"
+        alt="authImage"
+      />
+    </div>
+
+    <form
+      [formGroup]="loginForm"
+      class="max-w-xl col-span-6"
+      (ngSubmit)="login()"
+    >
+      <app-input
+        [control]="loginForm.get('email')"
+        [id]="'email'"
+        [type]="'email'"
+        [label]="'Email'"
+      >
+      </app-input>
+
+      <app-input [control]="loginForm.get('password')" [id]="'password'"  [label]="'Password' ">
+        <li>
+          Password must be at least 8 characters and include uppercase,
+          lowercase, and a number"
+        </li>
+      </app-input>
+
+      @if (errorMsg) {
+      <div
+        class="mt-5 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:text-red-400 dark:border-red-800"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+          <span class="font-medium"> {{ errorMsg | titlecase }} </span>
+        </div>
+      </div>
+      }
+
+      <button type="submit" class="btn">
+        SIGNIN @if(callAPI) {
+        <i class="fas fa-spinner fa-spin text-white"></i>
+        }
+      </button>
+
+      <p
+        routerLink="/forgotpassword"
+        class="underline cursor-pointer text-blue-600 py-3"
+      >
+        FORGET PASSWORD
+      </p>
+
+      <div class="text-center mt-5">
+        New In ShipShop
+        <a routerLink="/signup" class="text-blue-600 cursor-pointer underline">
+          SIGNUP ?
+        </a>
+      </div>
+    </form>
+  </div>
+</section>

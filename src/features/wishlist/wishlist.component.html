@@ -1,0 +1,14 @@
+<section>
+  <div class="container">
+    <div class="grid md:grid-cols-12  space-x-5">
+      @for (product of productWishlist ; track product.id) {
+      <div class="col-span-6">
+        <app-card [product]="product" [wish]="false" >
+          <i (click)="removeProductFromWidhlist(product.id) " class="fa-regular fa-trash-can cursor-pointer    text-2xl text-red-400"></i>
+        </app-card>
+
+      </div>
+      }
+    </div>
+  </div>
+</section>
