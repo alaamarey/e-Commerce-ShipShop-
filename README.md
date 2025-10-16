@@ -104,6 +104,12 @@ State Management: powered by RxJS with BehaviorSubjects and Observables
 
  ---
 
+ 📸 Screenshots
+
+![Website Preview](./denialHomeImage.jpg)
+
+---
+
 🚀 Live Demo
 ---
 
