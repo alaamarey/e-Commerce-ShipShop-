@@ -1,30 +1,25 @@
 import { Routes } from '@angular/router';
-import { AuthLayoutComponent } from '../core/layout/auth-layout/auth-layout.component';
-import { SignupComponent } from '../core/auth/signup/signup.component';
-import { LoginComponent } from '../core/auth/login/login.component';
-import { BlankLayoutComponent } from '../core/layout/blank-layout/blank-layout.component';
-import { HomeComponent } from '../features/home/home.component';
-import { ProductsComponent } from '../features/products/products.component';
-import { BrandsComponent } from '../features/brands/brands.component';
-import { CategroiesComponent } from '../features/categroies/categroies.component';
-import { DetailsComponent } from '../features/details/details.component';
-import { AboutComponent } from '../features/about/about.component';
-import { ContactComponent } from '../features/contact/contact.component';
-import { CartComponent } from '../features/cart/cart.component';
-import { NotFoundComponent } from '../features/not-found/not-found.component';
-import { isLoggedGuard } from '../core/guards/is-logged-guard';
-import { authUserGuard } from '../core/guards/auth-user-guard';
-import { PaymentComponent } from '../features/payment/payment.component';
-import { AllordersComponent } from '../features/allorders/allorders.component';
-import { WishlistComponent } from '../features/wishlist/wishlist.component';
 import { ForgotpasswordComponent } from '../core/auth/forgotpassword/forgotpassword.component';
-import { ChangepasswordComponent } from '../features/changepassword/changepassword.component';
-import { productresolverResolver } from '../shared/resolver/productresolver-resolver';
+import { LoginComponent } from '../core/auth/login/login.component';
+import { SignupComponent } from '../core/auth/signup/signup.component';
+import { authUserGuard } from '../core/guards/auth-user-guard';
+import { isLoggedGuard } from '../core/guards/is-logged-guard';
+import { AuthLayoutComponent } from '../core/layout/auth-layout/auth-layout.component';
+import { BlankLayoutComponent } from '../core/layout/blank-layout/blank-layout.component';
+import { AboutComponent } from '../features/about/about.component';
+import { AllordersComponent } from '../features/allorders/allorders.component';
+import { BrandsComponent } from '../features/brands/brands.component';
 import { cartResolver } from '../features/cart/resolver/cart-resolver';
+import { CategroiesComponent } from '../features/categroies/categroies.component';
+import { ContactComponent } from '../features/contact/contact.component';
+import { DetailsComponent } from '../features/details/details.component';
+import { detailsResolver } from '../features/details/resolver/details-resolver';
+import { NotFoundComponent } from '../features/not-found/not-found.component';
+import { ProductsComponent } from '../features/products/products.component';
 import { wishlistResolver } from '../features/wishlist/resolver/wishlist-resolver';
 import { brandsResolver } from '../shared/resolver/brands-resolver';
 import { categroyResolver } from '../shared/resolver/categroy-resolver';
-import { detailsResolver } from '../features/details/resolver/details-resolver';
+import { productresolverResolver } from '../shared/resolver/productresolver-resolver';
 
 export const routes: Routes = [
 
@@ -70,7 +65,7 @@ export const routes: Routes = [
                 path: 'categroy', component: CategroiesComponent, title: 'CATEGROY', resolve: { categroy: categroyResolver }
             },
             {
-                path: 'cart', component: CartComponent, title: 'CART', resolve: { cart: cartResolver }
+                path: 'cart', loadComponent: () => import('../features/cart/cart.component').then(c => c.CartComponent), title: 'CART', resolve: { cart: cartResolver }
             },
             {
                 path: 'details/:slug/:id', component: DetailsComponent, title: 'Details', resolve: { details: detailsResolver }
@@ -82,16 +77,16 @@ export const routes: Routes = [
                 path: 'contact', component: ContactComponent, title: 'CONTACT'
             },
             {
-                path: 'payment/:cartId', component: PaymentComponent, title: 'PAYMENT'
+                path: 'payment/:cartId', loadComponent: () => import('../features/payment/payment.component').then(c => c.PaymentComponent), title: 'PAYMENT'
             },
             {
                 path: 'allorders', component: AllordersComponent, title: 'AllORDERS'
             },
             {
-                path: 'wishlist', component: WishlistComponent, title: 'WISHLIST', resolve: { wishlist: wishlistResolver }
+                path: 'wishlist', loadComponent: () => import('../features/wishlist/wishlist.component').then(c => c.WishlistComponent), title: 'WISHLIST', resolve: { wishlist: wishlistResolver }
             },
             {
-                path: 'changepassword', component: ChangepasswordComponent, title: 'CHANGE PASSWORD '
+                path: 'changepassword', loadComponent: () => import('../features/changepassword/changepassword.component').then((C) => C.ChangepasswordComponent), title: 'CHANGE PASSWORD '
             },
 
             {

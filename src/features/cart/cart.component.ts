@@ -3,10 +3,11 @@ import { CartService } from '../../core/services/cart.service';
 import { CartDetails } from '../../core/models/cart-details.interface';
 import { CurrencyPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cart',
-  imports: [CurrencyPipe,  RouterLink  ],
+  imports: [CurrencyPipe, TranslatePipe, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -15,16 +16,15 @@ export class CartComponent implements OnInit {
   private readonly cartService = inject(CartService);
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  cartDetails: CartDetails    = {} as CartDetails;
-  cartId: string | null = null; 
+  cartDetails: CartDetails = {} as CartDetails;
+  cartId: string | null = null;
 
   ngOnInit(): void {
 
-
-
-
+    // this.getLoggedUserCart()
     this.activatedRoute.data.subscribe(data => {
-      this.cartDetails = data['cart'] ??  {}
+      this.cartDetails = data['cart'] ?? {}
+      this.cartId = data['cart']
     })
   }
 
@@ -38,7 +38,6 @@ export class CartComponent implements OnInit {
       })
     })
   }
-
   updateCartProductQuantity(productId: string | null, count: number): void {
     this.cartService.updateCartProductQuantity(productId, count).subscribe({
       next: (res => {
@@ -48,24 +47,23 @@ export class CartComponent implements OnInit {
       })
     })
   }
-
-  removeSpecificCartItem(productId: string | null ): void {
+  removeSpecificCartItem(productId: string | null): void {
     this.cartService.removeSpecificCartItem(productId).subscribe({
       next: (res => {
         console.log(res);
         if (res.status === 'success')
           this.cartDetails = res.data
-        this.cartService.numOfCartItems.set(res.numOfCartItems); 
+        this.cartService.numOfCartItems.set(res.numOfCartItems);
       })
     })
-    
+
   }
 
   clearUserCart(): void {
     this.cartService.clearUserCart().subscribe({
       next: (res => {
         console.log(res);
-        this.cartDetails = {} as CartDetails   ;
+        this.cartDetails = {} as CartDetails;
       })
     })
   }

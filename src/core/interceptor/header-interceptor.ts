@@ -10,14 +10,15 @@ export const headerInterceptor: HttpInterceptorFn = (req, next) => {
 
 
   // if (req.url.includes('cart') || req.url.includes('wishlist')  ||  req.url.includes('changepassword') ) {
-          if (cookieService.get('token')) {
-        req = req.clone({
-          setHeaders: {
-            token: cookieService.get('token')
-          }
-        })
+  if (cookieService.get('token')) {
+    req = req.clone({
+      setHeaders: {
+        token: cookieService.get('token'),
+        // lang:  cookieService.get('lang')
       }
-// }
+    })
+  }
+  // }
 
 
 

@@ -1,42 +1,39 @@
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { Datum } from '../../../core/models/categroy-res.interface';
-import { CategroyService } from '../../../core/services/categroy.service';
-import { Component, inject, OnInit } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-popular-categroy',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './popular-categroy.component.html',
   styleUrl: './popular-categroy.component.css'
 })
-export class PopularCategroyComponent  implements  OnInit {
+export class PopularCategroyComponent implements OnInit, OnDestroy {
 
-  private readonly categroyService = inject(CategroyService); 
-  private readonly activatedRoute = inject(ActivatedRoute); 
+  private readonly activatedRoute = inject(ActivatedRoute);
 
-  categroiesDataList: Datum[] = {} as Datum[]; 
+  categroiesDataList: Datum[] = {} as Datum[];
+  categroySub$ = new Subject();
 
   ngOnInit(): void {
- this.categroiesDataList = this.activatedRoute.snapshot.data['categroy'] ??  []
+    this.categroiesDataList = this.activatedRoute.snapshot.data['categroy'] ?? []
 
   }
 
-
-  getAllCategroies() : void {
-    this.categroyService.getAllCategroies().subscribe({
-      next: (res => {
-        console.log(res);
-        this.categroiesDataList = res.data;
-        
-      }),
-      error: (error => {
-      console.log( error );
-    })  
-  })
+  getCategroies(): void {
+    this.activatedRoute.data.pipe(takeUntil(this.categroySub$)).subscribe(
+      resposne => {
+        this.categroiesDataList = resposne['categroy'] ?? []
+      }
+    )
   }
 
-
-
+  ngOnDestroy(): void {
+    this.categroySub$.next(0);
+    this.categroySub$.complete();
+  }
 
 
 

@@ -7,9 +7,10 @@ import { Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TitleCasePipe } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, InputComponent, TitleCasePipe, RouterLink],
+  imports: [ReactiveFormsModule, TranslatePipe, InputComponent, TitleCasePipe, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -60,7 +61,7 @@ export class LoginComponent implements OnInit {
           console.log(res);
           if (res.message === 'success') {
 
-             //1. save token
+            //1. save token
             this.cookieService.set('token', res.token);
             // navigate to home
             setTimeout(() => {

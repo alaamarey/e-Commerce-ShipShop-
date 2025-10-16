@@ -1,41 +1,44 @@
-import { BrandsService } from '../../core/services/brands.service';
-import { Component ,inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SearchPipe } from '../../shared/pipes/search-pipe';
-import {NgxPaginationModule } from 'ngx-pagination'
-import {  Datum } from '../../core/models/brands-res.interface';
 import { ActivatedRoute } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Subject, takeUntil } from 'rxjs';
+import { Datum } from '../../core/models/brands-res.interface';
+import { BrandsService } from '../../core/services/brands.service';
+import { SearchPipe } from '../../shared/pipes/search-pipe';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-brands',
-  imports: [FormsModule ,SearchPipe ,NgxPaginationModule],
+  imports: [FormsModule, TranslatePipe, SearchPipe, NgxPaginationModule],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css'
 })
-export class BrandsComponent  implements OnInit  {
+export class BrandsComponent implements OnInit, OnDestroy {
 
   private readonly brandsService = inject(BrandsService);
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  brandsList: Datum[] = [];  
-  searchInput !: string; 
+  brandsList: Datum[] = [];
+  searchInput !: string;
   itemsPerPage!: number;
   currentPage!: number;
   totalItems!: number;
 
+  brandSub$ = new Subject();
+
   ngOnInit(): void {
+    this.getBrandPageOne();
 
-
-
-    this.activatedRoute.data.subscribe(data => {
-      this.brandsList = data['brand'] ?? []
-    } )
   }
 
+  getBrandPageOne() {
+    this.activatedRoute.data.pipe(takeUntil(this.brandSub$)).subscribe(data => {
+      this.brandsList = data['brand'] ?? []
+    })
+  }
 
-
-
-  getAllBrands(pageNumber : number = 1 ): void { 
+  getAllBrands(pageNumber: number = 1): void {
     this.brandsService.getAllBrands(pageNumber).subscribe({
       next: (res => {
         console.log(res);
@@ -47,5 +50,13 @@ export class BrandsComponent  implements OnInit  {
       })
     })
   }
+
+  ngOnDestroy(): void {
+    this.brandSub$.next(0);
+    this.brandSub$.complete();
+  }
+
+
+
 
 }

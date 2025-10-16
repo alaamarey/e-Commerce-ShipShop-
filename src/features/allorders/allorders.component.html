@@ -1,15 +1,15 @@
 <section class="my-20">
   <div class="container">
     <div class="text-center">
-      <span class="font-black text-3xl"> Dear </span>
+      <span class="font-black text-3xl">{{ "order.dear" | translate }} </span>
       <span class="text-fuchsia-600"> {{ userOrder.name }} </span>
-      <p>This Is Your Order :</p>
+      <p>{{ "order.yourOrder" | translate }}</p>
     </div>
 
     @for (order of orders; track order.id) {
-    <div class="border rounded-lg mt-5 p-3">
+    <div class="border rounded-lg mt-5 p-3 w-[90%] mx-auto md:w-auto">
       <span class="text-sm"> {{ order.createdAt | date : "mediumDate" }} </span>
-      <div class=" ">
+      <div class="">
         <div class="flex gap-x-2">
           @for (item of order.cartItems ; track $index) {
           <img
@@ -20,26 +20,24 @@
           }
         </div>
 
-
-       
         <div class="pt-3">
           <p>
-            orderID <span class="text-fuchsia-700"> {{ order.id }} </span>
+            {{ "order.orderId" | translate }}
+            <span class="text-fuchsia-700"> {{ order.id }} </span>
           </p>
-          <p class="py-3" >
-            total Order Price
+          <p class="py-3">
+            {{ "order.totlaOrderPrice" | translate }}
             <span class="text-fuchsia-700">
               {{ order.totalOrderPrice | currency : "GBP" }}
             </span>
           </p>
           <p>
-            paymentMethodType :
+            {{ "order.paymentMethodType" | translate }} :
             <span class="text-fuchsia-700">
               {{ order.paymentMethodType }}
             </span>
-          </p>     
+          </p>
         </div>
-        
       </div>
     </div>
     }

@@ -4,10 +4,11 @@ import { Datum } from './models/wishlist-res.interface';
 import { CardComponent } from "../../shared/components/card/card.component";
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [CardComponent],
+  imports: [CardComponent, TranslatePipe],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css'
 })

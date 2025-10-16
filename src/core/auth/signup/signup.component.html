@@ -1,16 +1,16 @@
 <section class="">
   <div class="">
-    <div class="grid md:grid-cols-12 items-center gap-x-10 bg-gray-100">
-      <div class="col-span-6">
+    <div class="lg:grid lg:grid-cols-12 items-center gap-x-20">
+      <div class="lg:col-span-6">
         <img
           src="/auth5.jpg"
-          class="h-screen w-full object-cover"
+          class="h-[500px] lg:h-screen w-full object-cover"
           alt="authImage"
         />
       </div>
 
       <form
-        class="max-w-xl col-span-6"
+        class="mt-4 md:w-[90%] md:mx-auto lg:max-w-xl lg:col-span-6"
         [formGroup]="signupForm"
         (ngSubmit)="signup()"
       >
@@ -18,7 +18,7 @@
           [control]="signupForm.get('name')"
           [id]="'name'"
           [type]="'text'"
-          [label]="'Name'"
+          [label]="'auth.name' | translate"
         >
         </app-input>
 
@@ -26,27 +26,34 @@
           [control]="signupForm.get('email')"
           [id]="'email'"
           [type]="'email'"
-          [label]="'Email'"
+          [label]="'auth.email' | translate"
         >
         </app-input>
 
-        <app-input [control]="signupForm.get('password')" [id]="'password'" [label]="'Password'">
+        <app-input
+          [control]="signupForm.get('password')"
+          [id]="'password'"
+          [label]="'auth.password' | translate"
+        >
           <li>
-            Password must be at least 8 characters and include uppercase,
-            lowercase, and a number"
+            {{ "auth.passsMessage" | translate }}
           </li>
         </app-input>
 
-        <app-input [control]="signupForm.get('rePassword')" [id]="'rePassword'" [label]="'RePassword'">
+        <app-input
+          [control]="signupForm.get('rePassword')"
+          [id]="'rePassword'"
+          [label]="'auth.rePassword' | translate"
+        >
         </app-input>
 
         <app-input
           [control]="signupForm.get('phone')"
           [id]="'phone'"
           [type]="'tel'"
-          [label]="'Phone'"
+          [label]="'auth.phone' | translate"
         >
-          <li>Enter a valid Egyptian phone number</li>
+          <li>{{ "auth.phoneMessage" | translate }}</li>
         </app-input>
 
         @if (errorMsg) {
@@ -73,24 +80,20 @@
         </div>
         }
 
-
-        <button
-          type="submit"
-          class="btn"
-        >
-          Submit @if(callAPI) {
+        <button type="submit" class="btn">
+          {{ "auth.submit" | translate }} @if(callAPI) {
           <i class="fas fa-spinner fa-spin text-white"></i>
           }
         </button>
 
         <div class="text-center mt-5">
           <p>
-            Already Has Account
+            {{ "auth.alreadyHasAccount" | translate }}
             <a
               routerLink="/login"
               class="text-blue-600 cursor-pointer underline"
             >
-              LOGIN ?
+              {{ "auth.login" | translate }} ?
             </a>
           </p>
         </div>

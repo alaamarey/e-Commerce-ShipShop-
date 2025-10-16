@@ -1,79 +1,71 @@
 <section class="p-3">
-    <div class="wave-footer relative">
-      <div class="grid md:grid-cols-12 items-center md:px-30 ">
-
-        <div class=" hidden  md:flex col-span-6  space-x-20 py-19">
-
-
-          <div class="md:col-span-2">
-            <h2 class="h2-style font-black">SHOP</h2>
-            <ul>
-              <li>Products</li>
-              <li>Brands</li>
-              <li>Categroies</li>
-            </ul>
-          </div>
-
-
-
-          <div class="md:col-span-2">
-            <h2 class="h2-style font-black">HELP</h2>
-            <ul>
-              <li>Contact Us</li>
-              <li>FAQ</li>
-              <li>Accessability</li>
-              <li>Privacy Policy</li>
-              <li>Terms</li>
-            </ul>
-          </div>
-
-
-
-          <div class="md:col-span-2">
-            <h2 class="h2-style  font-black">ABOUT</h2>
-            <ul>
-              <li>Careers</li>
-              <li>Press</li>
-              <li>Join Our Team</li>
-              <li>Get In Touch</li>
-              <li>Our Salry</li>
-              <li>Shipping</li>
-              <li>Our Story</li>
-            </ul>
-          </div>
+  <div class="wave-footer relative">
+    <div class="grid lg:grid-cols-12 items-center lg:px-30">
+      <div class="hidden lg:flex col-span-6 space-x-20 py-19">
+        <div class="lg:col-span-2">
+          <h2 class="h2-style font-black">
+            {{ "footer.shop.title" | translate }}
+          </h2>
+          <ul>
+            <li>{{ "footer.shop.products" | translate }}</li>
+            <li>{{ "footer.shop.brands" | translate }}</li>
+            <li>{{ "footer.shop.categories" | translate }}</li>
+          </ul>
         </div>
 
+        <div class="lg:col-span-2">
+          <h2 class="h2-style font-black">
+            {{ "footer.help.title" | translate }}
+          </h2>
+          <ul>
+            <li>{{ "footer.help.contact" | translate }}</li>
+            <li>{{ "footer.help.faq" | translate }}</li>
+            <li>{{ "footer.help.accessibility" | translate }}</li>
+            <li>{{ "footer.help.privacy" | translate }}</li>
+            <li>{{ "footer.help.terms" | translate }}</li>
+          </ul>
+        </div>
 
-
-
-
-
-
-
-        <div class="md:col-span-6">
-          <h2 class="font-bold text-center">FOLLOW US</h2>
-
-          <ul class="flex justify-center space-x-2 text-xl my-2 text-white">
-            <li class="oval">
-              <a href="#"> <i class="fa-brands fa-facebook-f"></i> </a>
-            </li>
-            <li class="oval">
-              <a href="#"> <i class="fa-brands fa-instagram"></i> </a>
-            </li>
-            <li class="oval">
-              <a href="#"> <i class="fa-brands fa-pinterest"></i> </a>
-            </li>
-            <li class="oval">
-              <a href="#"> <i class="fa-brands fa-twitter"></i> </a>
-            </li>
+        <div class="lg:col-span-2">
+          <h2 class="h2-style font-black">
+            {{ "footer.about.title" | translate }}
+          </h2>
+          <ul>
+            <li>{{ "footer.about.careers" | translate }}</li>
+            <li>{{ "footer.about.press" | translate }}</li>
+            <li>{{ "footer.about.join" | translate }}</li>
+            <li>{{ "footer.about.contact" | translate }}</li>
+            <li>{{ "footer.about.salary" | translate }}</li>
+            <li>{{ "footer.about.shipping" | translate }}</li>
+            <li>{{ "footer.about.story" | translate }}</li>
           </ul>
         </div>
       </div>
 
-      <hr class="text-black font-semibold" />
+      <div class="lg:col-span-6">
+        <h2 class="font-bold text-center">{{ "footer.follow" | translate }}</h2>
 
-      <p class="text-sm absolute bottom-2">
-        @2025 Victorious.All rights reserved
-      </p>
+        <ul class="flex justify-center space-x-2 text-xl my-2 text-white">
+          <li class="oval">
+            <a href="#"> <i class="fa-brands fa-facebook-f"></i> </a>
+          </li>
+          <li class="oval">
+            <a href="#"> <i class="fa-brands fa-instagram"></i> </a>
+          </li>
+          <li class="oval">
+            <a href="#"> <i class="fa-brands fa-pinterest"></i> </a>
+          </li>
+          <li class="oval">
+            <a href="#"> <i class="fa-brands fa-twitter"></i> </a>
+          </li>
+        </ul>
+      </div>
     </div>
+
+    <hr class="text-black font-semibold" />
+
+    <p class="text-sm absolute bottom-2">
+      {{ "footer.copyright" | translate }}
+    </p>
+  </div>
 </section>

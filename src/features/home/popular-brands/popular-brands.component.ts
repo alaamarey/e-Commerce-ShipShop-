@@ -1,41 +1,46 @@
-import { Component, inject, OnInit , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrandsService } from '../../../core/services/brands.service';
-import { BrandsRes, Datum } from '../../../core/models/brands-res.interface';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { Datum } from '../../../core/models/brands-res.interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-popular-brands',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './popular-brands.component.html',
   styleUrl: './popular-brands.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class PopularBrandsComponent implements OnInit {
+export class PopularBrandsComponent implements OnInit, OnDestroy {
 
-  private readonly brandsService = inject(BrandsService);
   private readonly activatedRoute = inject(ActivatedRoute);
 
   brandsDataList: Datum[] = {} as Datum[];
-
+  brandSub$ = new Subject();
 
   ngOnInit(): void {
-    this.brandsDataList = this.activatedRoute.snapshot.data['brand'] ?? []; 
-
-
+    this.getBrands();
   }
 
 
-  getAllBrands(): void {
-  
-    this.brandsService.getAllBrands().subscribe({
-      next: (res => {
-        console.log(res);
-        this.brandsDataList = res.data;
-      })
-    })
+
+
+  getBrands(): void {
+    this.activatedRoute.data.pipe(takeUntil(this.brandSub$)).subscribe(
+      response => {
+        this.brandsDataList = response['brand'] ?? [];
+      }
+    )
   }
+
+  ngOnDestroy(): void {
+    this.brandSub$.next(0);
+    this.brandSub$.complete();
+  }
+
+
 }
-  
+
 
 
 

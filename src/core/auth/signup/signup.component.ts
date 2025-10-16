@@ -6,22 +6,23 @@ import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 import { InputComponent } from "../../../shared/components/input/input.component";
 import { AuthService } from '../service/auth.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule, InputComponent, TitleCasePipe ,RouterLink],
+  imports: [ReactiveFormsModule, TranslatePipe, InputComponent, TitleCasePipe, RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
-export class SignupComponent implements OnInit  ,OnDestroy {
+export class SignupComponent implements OnInit, OnDestroy {
 
   private readonly authService = inject(AuthService);
   private readonly fb = inject(FormBuilder);
   private readonly cookieService = inject(CookieService);
   private readonly router = inject(Router);
   signupForm !: FormGroup;
-  private signupSub : Subscription  = new Subscription () ;
+  private signupSub: Subscription = new Subscription();
   errorMsg: string = '';
   callAPI: boolean = false;
 
@@ -56,10 +57,10 @@ export class SignupComponent implements OnInit  ,OnDestroy {
   signup() {
     if (this.signupForm.valid) {
       console.log(this.signupForm);
-      
+
       this.callAPI = true;
-      
-      
+
+
       if (this.signupSub) {
         this.signupSub.unsubscribe();
       }
@@ -74,19 +75,19 @@ export class SignupComponent implements OnInit  ,OnDestroy {
 
             //2.navigate to path login
             setTimeout(() => {
-        
+
               this.router.navigate(['/login']);
             }, 1500);
-          
+
           }
-           this.callAPI = false;
+          this.callAPI = false;
 
         }),
 
         error: (err => {
           console.log(err);
           this.errorMsg = err.error.message;
-          this.callAPI =false
+          this.callAPI = false
         })
 
       })
@@ -100,8 +101,8 @@ export class SignupComponent implements OnInit  ,OnDestroy {
 
 
 
-ngOnDestroy(): void {
-  this.signupSub.unsubscribe();
-}
+  ngOnDestroy(): void {
+    this.signupSub.unsubscribe();
+  }
 
 }

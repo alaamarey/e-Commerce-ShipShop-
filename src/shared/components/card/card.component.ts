@@ -10,7 +10,7 @@ import { Placeholder } from '../../directives/placeholder';
 
 @Component({
   selector: 'app-card',
-  imports: [CurrencyPipe, RouterLink, AddBtnComponent, TremPipe , Placeholder],
+  imports: [CurrencyPipe, RouterLink, AddBtnComponent, TremPipe, Placeholder],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
@@ -20,12 +20,9 @@ export class CardComponent {
   private readonly wishlistService = inject(WishlistService);
   private readonly toastrService = inject(ToastrService);
 
-  productWishlist: Datum[] = {} as Datum[]; 
-   @Input() wish: boolean = true;
-  
-  
+  productWishlist: Datum[] = {} as Datum[];
+  @Input() wish: boolean = true;
   @Input({ required: true }) product: Datum = {} as Datum;
-
 
   addProductToWishlist(productId: string): void {
     this.wishlistService.addProductToWishlist(productId).subscribe({
@@ -33,7 +30,7 @@ export class CardComponent {
         console.log(res);
         if (res.status === 'success') {
           this.toastrService.success(res.message, 'SHIPSHOP ', { positionClass: 'toast-top-left' })
-          this.wishlistService.numOfwishlistItems.set(res.data.length); 
+          this.wishlistService.numOfwishlistItems.set(res.data.length);
         }
       }
     })

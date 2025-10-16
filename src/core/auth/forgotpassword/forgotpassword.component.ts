@@ -8,14 +8,17 @@ import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { subscribe } from 'diagnostics_channel';
+import { TremPipe } from '../../../shared/pipes/trem-pipe';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forgotpassword',
-  imports: [InputComponent, ReactiveFormsModule],
+  imports: [InputComponent, TranslatePipe, ReactiveFormsModule],
   templateUrl: './forgotpassword.component.html',
   styleUrl: './forgotpassword.component.css'
 })
-export class ForgotpasswordComponent implements OnInit , OnDestroy {
+export class ForgotpasswordComponent implements OnInit, OnDestroy {
 
   @ViewChild('email') emailEle !: ElementRef;
   private readonly authService = inject(AuthService);
@@ -30,11 +33,11 @@ export class ForgotpasswordComponent implements OnInit , OnDestroy {
   resetPasswordForm !: FormGroup;
   stepper: number = 1;
   email !: string;
-  
-  forgetPassSub!: Subscription;
-  verifyResetCodeSub !: Subscription;
-  resetPassSub !: Subscription; 
-    
+
+  forgetPassSub: Subscription = new Subscription();
+  verifyResetCodeSub: Subscription = new Subscription;
+  resetPassSub: Subscription = new Subscription;
+
 
   ngOnInit() {
     this.initForm();
@@ -64,11 +67,11 @@ export class ForgotpasswordComponent implements OnInit , OnDestroy {
   forgetPassword(): void {
     if (this.forgotPasswordForm.valid) {
 
-      if (this.forgetPassSub) this.forgetPassSub.unsubscribe(); 
+      if (this.forgetPassSub) this.forgetPassSub.unsubscribe();
 
       this.email = this.forgotPasswordForm.get('email')?.value;
       console.log(this.forgotPasswordForm);
-     this.forgetPassSub =  this.authService.forgotPassword(this.forgotPasswordForm.value).subscribe({
+      this.forgetPassSub = this.authService.forgotPassword(this.forgotPasswordForm.value).subscribe({
         next: (res => {
           if (res.statusMsg === 'success') {
             this.toastrService.success(res.message, 'SHIPSHOP')
@@ -84,9 +87,9 @@ export class ForgotpasswordComponent implements OnInit , OnDestroy {
   verifyResetCode(): void {
     if (this.verifyResetCodeForm.valid) {
 
-      if (this.verifyResetCodeSub) this.verifyResetCodeSub.unsubscribe(); 
+      if (this.verifyResetCodeSub) this.verifyResetCodeSub.unsubscribe();
 
-    this.verifyResetCodeSub = this.authService.verifyResetCode(this.verifyResetCodeForm.value).subscribe({
+      this.verifyResetCodeSub = this.authService.verifyResetCode(this.verifyResetCodeForm.value).subscribe({
         next: (res => {
           if (res.status === 'Success') {
 
@@ -103,9 +106,9 @@ export class ForgotpasswordComponent implements OnInit , OnDestroy {
 
   resetPassword(): void {
     if (this.resetPasswordForm.valid) {
-      if (this.resetPassSub) this.resetPassSub.unsubscribe(); 
+      if (this.resetPassSub) this.resetPassSub.unsubscribe();
 
-    this.resetPassSub =   this.authService.resetPassword(this.resetPasswordForm.value).subscribe({
+      this.resetPassSub = this.authService.resetPassword(this.resetPasswordForm.value).subscribe({
         next: (res => {
           this.cookieService.set('token', res.token)
           this.router.navigate(['/home']);
@@ -119,12 +122,12 @@ export class ForgotpasswordComponent implements OnInit , OnDestroy {
 
 
 
-ngOnDestroy(): void {
-  this.forgetPassSub.unsubscribe(); 
-  this.verifyResetCodeSub.unsubscribe()
-  this.resetPassSub.unsubscribe(); 
+  ngOnDestroy(): void {
+    this.forgetPassSub.unsubscribe();
+    this.verifyResetCodeSub.unsubscribe()
+    this.resetPassSub.unsubscribe();
 
-}
+  }
 
 
 

@@ -1,115 +1,90 @@
-
 @if( element === 'input'){
+<div class="relative z-0 w-[90%] mx-auto md:w-full mb-5 group">
+  <input
+    [class]="{
+      'border-red-600': control?.invalid && control?.touched,
+      'border-green-600': control?.valid
+    }"
+    [formControl]="control"
+    [type]="type || flagPass ? 'text' : 'password'"
+    [id]="id"
+    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
+    placeholder=" "
+  />
 
-  <div class="relative z-0 w-full mb-5 group">
-     <input
-       [class]="{
-         'border-red-600': control?.invalid && control?.touched,
-         'border-green-600': control?.valid
-       }"
-       [formControl]="control"
-       [type]="type || flagPass ? 'text' : 'password'"
-       [id]="id"
-       class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
-       placeholder=" "
-     />
-   
-     <label
-       [for]="id"
-       class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-gray-600 peer-focus:dark:text-gray-950 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-     >
-       @if( id === 'email') {
-       <span class="text-fuchsia-500 text-lg"
-         ><i class="fa-solid fa-envelope"></i
-       ></span>
-       } @if(id === 'phone'){
-       <span> <i class="fa-solid fa-phone text-fuchsia-500 text-lg"></i> </span>
-       }
-       {{ label}}
-     </label>
-   
-  
-    @if( id === 'password' || id === 'rePassword' ) {
-    <span
-      (click)="flagPass = !flagPass"
-      class="cursor-pointer text-lg text-fuchsia-500 hover:text-fuchsia-700"
-    >
-      @if( flagPass ){
-      <i class="fas fa-eye absolute bottom-5 right-0"></i>
-      }@else {
-      <i class="fas fa-eye-slash absolute bottom-5 right-0"></i>
-  
-      }
-    </span>
-  
+  <label
+    [for]="id"
+    class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-gray-600 peer-focus:dark:text-gray-950 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+  >
+    @if( id === 'email') {
+    <span class="text-fuchsia-500 text-lg"
+      ><i class="fa-solid fa-envelope"></i
+    ></span>
+    } @if(id === 'phone'){
+    <span> <i class="fa-solid fa-phone text-fuchsia-500 text-lg"></i> </span>
     }
-  </div>
+    {{ label }}
+  </label>
 
-}  
+  @if( id === 'password' || id === 'rePassword' ) {
+  <span
+    (click)="flagPass = !flagPass"
+    class="cursor-pointer text-lg text-fuchsia-500 hover:text-fuchsia-700"
+  >
+    @if( flagPass ){
+    <i class="fas fa-eye absolute bottom-5 right-0"></i>
+    }@else {
+    <i class="fas fa-eye-slash absolute bottom-5 right-0"></i>
 
-
-@else {
-  <div class="relative z-0 w-full mb-5 group">
-     <textarea
-       [class]="{
-         'border-red-600': control?.invalid && control?.touched,
-         'border-green-600': control?.valid
-       }"
-       [formControl]="control"
-       [id]="id"
-       class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
-       placeholder=" "
-     ></textarea>
-   
-     <label
-       [for]="id"
-       class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-gray-600 peer-focus:dark:text-gray-950 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-     >
-       @if( id === 'email') {
-       <span class="text-fuchsia-500 text-lg"
-         ><i class="fa-solid fa-envelope"></i
-       ></span>
-       } @if(id === 'phone'){
-       <span> <i class="fa-solid fa-phone text-fuchsia-500 text-lg"></i> </span>
-       }
-       {{ id | titlecase }}
-     </label>
-    
-  
-    
-  
-    @if( id === 'password' || id === 'rePassword' ) {
-    <span
-      (click)="flagPass = !flagPass"
-      class="cursor-pointer text-lg text-fuchsia-500 hover:text-fuchsia-700"
-    >
-      @if( flagPass ){
-      <i class="fas fa-eye absolute bottom-5 right-0"></i>
-      }@else {
-      <i class="fas fa-eye-slash absolute bottom-5 right-0"></i>
-  
-      }
-    </span>
-  
     }
-  </div>
-}
+  </span>
 
+  }
+</div>
 
+} @else {
+<div class="relative z-0 w-full mb-5 group">
+  <textarea
+    [class]="{
+      'border-red-600': control?.invalid && control?.touched,
+      'border-green-600': control?.valid
+    }"
+    [formControl]="control"
+    [id]="id"
+    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
+    placeholder=" "
+  ></textarea>
 
+  <label
+    [for]="id"
+    class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-gray-600 peer-focus:dark:text-gray-950 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+  >
+    @if( id === 'email') {
+    <span class="text-fuchsia-500 text-lg"
+      ><i class="fa-solid fa-envelope"></i
+    ></span>
+    } @if(id === 'phone'){
+    <span> <i class="fa-solid fa-phone text-fuchsia-500 text-lg"></i> </span>
+    }
+    {{ id | titlecase }}
+  </label>
 
+  @if( id === 'password' || id === 'rePassword' ) {
+  <span
+    (click)="flagPass = !flagPass"
+    class="cursor-pointer text-lg text-fuchsia-500 hover:text-fuchsia-700"
+  >
+    @if( flagPass ){
+    <i class="fas fa-eye absolute bottom-5 right-0"></i>
+    }@else {
+    <i class="fas fa-eye-slash absolute bottom-5 right-0"></i>
 
+    }
+  </span>
 
-
-
-
-
-
-
-
-
-
-@if( control?.errors && control?.touched ){
+  }
+</div>
+} @if( control?.errors && control?.touched ){
 
 <div
   class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:text-red-400"

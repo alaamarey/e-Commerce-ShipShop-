@@ -5,25 +5,27 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../core/auth/service/auth.service';
 import { CartService } from '../../../core/services/cart.service';
 import { WishlistService } from '../../../core/services/wishlist.service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { MyTranslateService } from '../../../core/services/my-translate.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [ RouterLink , RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit{
-  @ViewChild('nav') navElement !: ElementRef; 
-  private readonly cartService = inject(CartService); 
-  private readonly wishlistService = inject(WishlistService); 
+export class NavbarComponent implements OnInit {
+  @ViewChild('nav') navElement !: ElementRef;
+  private readonly cartService = inject(CartService);
+  private readonly wishlistService = inject(WishlistService);
 
   numOfCartItems: Signal<number> = computed<number>(() => this.cartService.numOfCartItems())
-  
-  numOfWishlistItems : Signal<number> = computed<number>(  () => this.wishlistService.numOfwishlistItems() )
 
-  @HostListener('window:scroll' ) 
+  numOfWishlistItems: Signal<number> = computed<number>(() => this.wishlistService.numOfwishlistItems())
+
+  @HostListener('window:scroll')
   scroll(): void {
-    if (scrollY > 0) {      
+    if (scrollY > 0) {
       this.navElement.nativeElement.style.position = 'fixed';
       this.navElement.nativeElement.style.right = '0';
       this.navElement.nativeElement.style.top = '0';
@@ -35,12 +37,21 @@ export class NavbarComponent implements OnInit{
       this.navElement.nativeElement.style.boxShadow = 'none';
     }
   }
-    
-  private readonly authService = inject(AuthService); 
-  private readonly router = inject(Router); 
+
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly myTranslateService = inject(MyTranslateService);
+  private readonly translateService = inject(TranslateService);
+
+  currentLang: string;
 
 
-  constructor(private flowbiteService: FlowbiteService) { }
+
+  constructor(private flowbiteService: FlowbiteService) {
+    this.currentLang = this.translateService.getCurrentLang();
+    console.log(this.currentLang);
+
+  }
 
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite((flowbite) => {
@@ -55,8 +66,8 @@ export class NavbarComponent implements OnInit{
     this.authService.signOut();
   }
 
-  showSearchInput():boolean  {
-    const url = this.router.url; 
+  showSearchInput(): boolean {
+    const url = this.router.url;
     return url.includes('products') || url.includes('brands') || url.includes('categroy');
   }
 
@@ -80,5 +91,9 @@ export class NavbarComponent implements OnInit{
   }
 
 
+
+  changeLang(lang: string) {
+    this.myTranslateService.changeLang(lang);
+  }
 
 }

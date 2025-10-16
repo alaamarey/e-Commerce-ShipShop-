@@ -10,6 +10,8 @@ import { headerInterceptor } from '../core/interceptor/header-interceptor';
 import { errorInterceptor } from '../core/interceptor/error-interceptor';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { loadingInterceptor } from '../core/interceptor/loading-interceptor';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
 
 
 
@@ -19,14 +21,30 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), provideClientHydration(withEventReplay()),
 
-    provideHttpClient(withFetch() , withInterceptors([headerInterceptor ,errorInterceptor ,loadingInterceptor])),
-    importProvidersFrom(CookieService , NgxSpinnerModule),
+    provideHttpClient(withFetch(), withInterceptors([headerInterceptor, loadingInterceptor, errorInterceptor,])),
+    importProvidersFrom(CookieService, NgxSpinnerModule),
     provideAnimations(),
     provideToastr(),
+
+    provideTranslateService({
+      fallbackLang: 'en',
+      loader: provideTranslateHttpLoader({
+        prefix: '/i18n/',
+        suffix: '.json'
+      })
+
+
+
+
+
+
+
+    })
 
 
 
 
 
   ]
-};
+}
+
