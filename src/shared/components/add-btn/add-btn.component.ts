@@ -11,24 +11,24 @@ import { ToastrService } from 'ngx-toastr';
 export class AddBtnComponent {
 
 
-  
-  private readonly cartService = inject(CartService); 
-  private readonly toastrService = inject(ToastrService); 
 
- @Input({required:true}) productId !:string | null ;   
- 
+  private readonly cartService = inject(CartService);
+  private readonly toastrService = inject(ToastrService);
+
+  @Input({ required: true }) productId !: string | null;
+
 
 
 
   addProductToCart(): void {
     this.cartService.addProductToCart(this.productId).subscribe({
-      
+
       next: (res => {
         console.log(res);
         if (res.status === 'success')
           this.toastrService.success(res.message, 'SHIPSHOP', { positionClass: 'toast-top-left' });
-        this.cartService.numOfCartItems.set(res.numOfCartItems); 
-      
+        this.cartService.numOfCartItems.set(res.numOfCartItems);
+
       })
     })
   }

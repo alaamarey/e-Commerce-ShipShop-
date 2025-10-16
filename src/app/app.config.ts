@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
@@ -19,12 +19,17 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+    provideRouter(routes,
+      withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
+      withHashLocation(),
+      withViewTransitions()
+    ), provideClientHydration(withEventReplay()),
 
     provideHttpClient(withFetch(), withInterceptors([headerInterceptor, loadingInterceptor, errorInterceptor,])),
     importProvidersFrom(CookieService, NgxSpinnerModule),
     provideAnimations(),
     provideToastr(),
+
 
     provideTranslateService({
       fallbackLang: 'en',
