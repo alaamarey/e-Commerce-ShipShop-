@@ -1,9 +1,8 @@
-##🛍️ E-Commerce Application (Angular 20)
+🛍️ E-Commerce Application (Angular 20)
 ---
 
 
 📖 Overview
-
 ---
 
 This is a fully responsive E-Commerce web application built using Angular 20.
@@ -14,7 +13,7 @@ The project leverages Angular SSR-ready architecture, TailwindCSS, and modern li
 
 ---
 
-##🚀 Key Features
+🚀 Key Features
 ---
 
 🧠 Angular 20 + RxJS + Zone.js for reactive, efficient data flow
@@ -48,10 +47,7 @@ The project leverages Angular SSR-ready architecture, TailwindCSS, and modern li
 🔍 Zone.js for automatic change detection in complex UIs
 
 ---
-
-
-##⚙️ Technologies Used
-
+⚙️ Technologies Used
 ---
 
 | Category                 | Tools / Packages           |
@@ -73,8 +69,7 @@ The project leverages Angular SSR-ready architecture, TailwindCSS, and modern li
 ---
 
 
-##🧠 Architecture Overview
-
+🧠 Architecture Overview
 ---
 
 Core Module: global services, interceptors, and guards
@@ -94,8 +89,7 @@ State Management: powered by RxJS with BehaviorSubjects and Observables
 ---
 
 
-##🔐 Authentication Workflow
-
+🔐 Authentication Workflow
 ---
 
 1.User registers via API → receives JWT token
@@ -110,7 +104,7 @@ State Management: powered by RxJS with BehaviorSubjects and Observables
 
  ---
 
-## 🚀 Live Demo
+🚀 Live Demo
 ---
 
 🔗 [View Website](https://e-commerce-ship-shop.vercel.app/)  
@@ -148,7 +142,7 @@ src/
  └── main.ts
 ```
 
-##💡 Notable Techniques
+💡 Notable Techniques
 ---
 
 ⚡  @defer and @loading blocks for lazy loading UI
@@ -167,7 +161,7 @@ src/
 
 ---
 
-##🧑‍💻 Author
+🧑‍💻 Author
 ---
 
 🌀 Developed by: Alaa Marey
@@ -182,7 +176,7 @@ src/
 
 ---
 
-##💬 Feedback
+💬 Feedback
 ---
 
 If you encounter any bugs or have feature suggestions, feel free to open an issue or contribute via pull request.
