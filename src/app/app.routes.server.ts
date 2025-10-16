@@ -10,6 +10,17 @@ export const serverRoutes: ServerRoute[] = [
     path: 'contact',
     renderMode: RenderMode.Prerender
   },
+
+  {
+    path: 'details/:slug/:id',
+    renderMode: RenderMode.Server
+  },
+
+  {
+    path: 'payment/:cartId',
+    renderMode: RenderMode.Server
+  },
+
   {
     path: '**',
     renderMode: RenderMode.Server
