@@ -1,5 +1,10 @@
 ##🛍️ E-Commerce Application (Angular 20)
+---
+
+
 📖 Overview
+
+---
 
 This is a fully responsive E-Commerce web application built using Angular 20.
 The app provides a complete online shopping experience with user authentication, product browsing, cart management, and order handling — all powered by real REST APIs.
@@ -7,7 +12,10 @@ The app provides a complete online shopping experience with user authentication,
 Users must register or log in to access the app.
 The project leverages Angular SSR-ready architecture, TailwindCSS, and modern libraries to provide a smooth, optimized user experience.
 
+---
+
 ##🚀 Key Features
+---
 
 🧠 Angular 20 + RxJS + Zone.js for reactive, efficient data flow
 
@@ -38,9 +46,14 @@ The project leverages Angular SSR-ready architecture, TailwindCSS, and modern li
 🧮 RxJS Operators to modify and combine data streams before rendering
 
 🔍 Zone.js for automatic change detection in complex UIs
+
 ---
 
+
 ##⚙️ Technologies Used
+
+---
+
 | Category                 | Tools / Packages           |
 | ------------------------ | -------------------------- |
 | **Framework**            | Angular 20                 |
@@ -56,9 +69,13 @@ The project leverages Angular SSR-ready architecture, TailwindCSS, and modern li
 | **Animations**           | Angular Animations         |
 | **Pagination**           | ngx-pagination             |
 
+
 ---
 
+
 ##🧠 Architecture Overview
+
+---
 
 Core Module: global services, interceptors, and guards
 
@@ -73,10 +90,13 @@ Route Guards: ensure users can’t access pages without authentication
 Resolver Guards: preload critical data before rendering pages
 
 State Management: powered by RxJS with BehaviorSubjects and Observables
+
 ---
 
 
 ##🔐 Authentication Workflow
+
+---
 
 1.User registers via API → receives JWT token
 
@@ -87,11 +107,11 @@ State Management: powered by RxJS with BehaviorSubjects and Observables
 4.Interceptor attaches token to every API call
 
 5.Logout clears cookies and redirects to login
+
  ---
 
-
-
 ## 🚀 Live Demo
+---
 
 🔗 [View Website](https://e-commerce-ship-shop.vercel.app/)  
 
@@ -129,6 +149,7 @@ src/
 ```
 
 ##💡 Notable Techniques
+---
 
 ⚡  @defer and @loading blocks for lazy loading UI
 
@@ -147,6 +168,7 @@ src/
 ---
 
 ##🧑‍💻 Author
+---
 
 🌀 Developed by: Alaa Marey
 
@@ -158,8 +180,11 @@ src/
 
 🌀 API-driven Architecture
 
+---
 
 ##💬 Feedback
+---
+
 If you encounter any bugs or have feature suggestions, feel free to open an issue or contribute via pull request.
 
 
