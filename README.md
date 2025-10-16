@@ -6,7 +6,6 @@ The app provides a complete online shopping experience with user authentication,
 
 Users must register or log in to access the app.
 The project leverages Angular SSR-ready architecture, TailwindCSS, and modern libraries to provide a smooth, optimized user experience.
----
 
 ##🚀 Key Features
 
@@ -149,12 +148,16 @@ src/
 
 ##🧑‍💻 Author
 
-Developed by: Alaa Marey
-Framework: Angular 20
-Hosting Platform: Vercel (SSR-ready)
-Styling: Tailwind + Flowbite
-API-driven Architecture
----
+🌀 Developed by: Alaa Marey
+
+🌀 Framework: Angular 20
+
+🌀 Hosting Platform: Vercel (SSR-ready)
+
+🌀 Styling: Tailwind + Flowbite
+
+🌀 API-driven Architecture
+
 
 ##💬 Feedback
 If you encounter any bugs or have feature suggestions, feel free to open an issue or contribute via pull request.
